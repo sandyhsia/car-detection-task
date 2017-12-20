@@ -2,7 +2,8 @@
 % Import the prediction file
 % name it as prediction
 % name the first coloum name
-% name the second coloum as label 
+% name the second coloum as label
+% Sample input "test_file_names.csv"
 
 ori = prediction.name{1};
 next = 0;
@@ -24,6 +25,7 @@ end
 results.name{sample} = ori;
 results.count(sample) = count;
 
+% You need to change the test image route here
 files = dir('deploy/test/*/*.jpg');
 for i = 1:max(size(files))
     folders=files(i).folder;

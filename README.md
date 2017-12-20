@@ -61,7 +61,8 @@ Here, [your-weight-file] is the trained model in ".h5" format, [your-image-path]
 *************************
 Step 5: Result Refinement
 *************************
-After Yolo, use a Machine Learning model to finally count the number of the car in each picture. (Codes are in master_dir/result_refinement/)
+After Yolo, use a Machine Learning model to finally count the number of the car in each picture.
 1. Following the instruction in Training_preparation.m (matlab) to prepare training data
 2. Run train_random_forest.py (python3) to training ML model and predict results
-3. Follow the instruction in combine_results.m (matlab) to get the submission version
+3. Run train_random_forest.py (python3) to training ML model and predict results (the trained best model is best_model_random_forest.sav, you may directly use it)
+4. Follow the instruction in combine_results.m (matlab) to get the submission version

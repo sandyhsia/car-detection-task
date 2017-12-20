@@ -5,14 +5,14 @@ gt = gt_info(); % you may change data route
 %Step 2, Add confidence level to ground truth accourding to trained Yolo
 %model's prediction on training set
 
-% Import CSV (prediction on training set)
+% Import CSV (prediction on training set) Ex output_640_newmodel.csv
 % name first  coloum: name
 %      second coloum: xmin
 %      Third  coloum: xmax
 %      Fourth coloum: ymin
 %      Fifth  coloum: ymax
 %      name the data as predict
-%You may just loaded the 'predict.map'
+%You may just loaded the 'predict.mat'
 
 gt = add_gt_score(gt,predict); % you may change the directory in the code
 
@@ -21,6 +21,7 @@ training_data =  add_Lidar_Feature(gt);
 
 %Save training set as csv for further machine learning training
 write_training_feature(training_data);
+% Sample Output "box_features.csv" and "box_labels.csv"
 
 %Prepare prediction features
 %Import the csv file from yolo prediction
@@ -32,7 +33,8 @@ write_training_feature(training_data);
 test_file =  preprocess_data(test_file);
 
 % Add Lidar Feature
-predict = add_predict_features(test_file);
+predict_test = add_test_feature(test_file);
 
 %Write it into csv
-write_test_feature(test_file,predict);
+write_test_feature(test_file,predict_test);
+%Sample output "test_box_features.csv"

@@ -5,8 +5,10 @@ box_count = 1;
 non_box_count =1;
 file_name = [];
 non_file_name = [];
-for idx = 1:size(test_predict,1)
+for idx = 1:size(test_predict.label,2)
     
+    
+    %Change route here!!!
     snapshot = ['deploy/test/',test_predict.name{idx}];
     name = test_predict.name{idx}(1:end-10);
     if exist(snapshot, 'file') == 0

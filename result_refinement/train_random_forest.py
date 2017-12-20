@@ -25,13 +25,9 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.preprocessing import Imputer
 
 def main():
-    #feature=pd.read_csv("/Users/yangzhang/Documents/UofM/Fall2017/EECS599/Project/rob599_dataset_deploy/train_feature.csv").values
-    #label=pd.read_csv("/Users/yangzhang/Documents/UofM/Fall2017/EECS599/Project/rob599_dataset_deploy/train_label.csv").values
-    
-    #feature=pd.read_csv("/Users/yangzhang/Documents/UofM/Fall2017/EECS599/Project/rob599_dataset_deploy/features_no_score.csv").values
-    #label=pd.read_csv("/Users/yangzhang/Documents/UofM/Fall2017/EECS599/Project/rob599_dataset_deploy/labels.csv").values
-    feature = pd.read_csv("C:/Users/zy/Desktop/599 Training set/box_features.csv").values
-    label = pd.read_csv("C:/Users/zy/Desktop/599 Training set/box_labels.csv").values
+    #Change route here!!!
+    feature = pd.read_csv("box_features.csv").values
+    label = pd.read_csv("box_labels.csv").values
     
     imp = Imputer(missing_values=np.nan,strategy='mean',axis=0)
     imp.fit(feature)
@@ -60,8 +56,6 @@ def main():
     best_model = RandomForestClassifier
     tree_size = np.arange(10,200,10)
     feature_range = np.arange(2,np.shape(feature)[1],1)
-   # C_range = [1]
-   # gamma_range = [1]
     for m in feature_range:
         for n in tree_size:    
             clf = RandomForestClassifier(n_estimators=n,max_features=m,max_depth=None,min_samples_split=2)
@@ -80,14 +74,15 @@ def main():
             filename = 'best_model_random_forest_purescore.sav'
             joblib.dump(best_model, filename)
             
-   
     
-    #loaded_model = joblib.load(filename)
-    #test_file = pd.read_csv("C:/Users/zy/Desktop/599 Training set/predict_features_no_score.csv").values
-    #for kk in range(15):
-    #    test_file[:,kk] = (test_file[:,kk]-mean_v[kk])/std[kk]
+    loaded_model = joblib.load(filename)
+    test_file = pd.read_csv("test_box_features.csv").values
+    for kk in range(15):
+        test_file[:,kk] = (test_file[:,kk]-mean_v[kk])/std[kk]
         
-    #test_label = best_model.predict(test_file)
+    test_label = best_model.predict(test_file)
+
+#copy the test label can combine it into test_file_names.csv
 
     return
 
